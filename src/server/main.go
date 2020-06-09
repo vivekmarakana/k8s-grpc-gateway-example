@@ -4,9 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net"
-	"net/http"
 
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	proto "github.com/vivekmarakana/k8s-grpc-gateway/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -34,30 +32,4 @@ func Run(ctx context.Context, network, address string) error {
 		<-ctx.Done()
 	}()
 	return s.Serve(l)
-}
-
-// RunInProcessGateway starts the invoke in process http gateway.
-func RunInProcessGateway(ctx context.Context, addr string, opts ...runtime.ServeMuxOption) error {
-	mux := runtime.NewServeMux(opts...)
-
-	proto.RegisterEchoServiceHandlerServer(ctx, mux, newEchoServer())
-
-	s := &http.Server{
-		Addr:    addr,
-		Handler: mux,
-	}
-
-	go func() {
-		<-ctx.Done()
-		if err := s.Shutdown(context.Background()); err != nil {
-			fmt.Printf("Failed to shutdown http gateway server: %v", err)
-		}
-	}()
-
-	if err := s.ListenAndServe(); err != http.ErrServerClosed {
-		fmt.Printf("Failed to listen and serve: %v", err)
-		return err
-	}
-
-	return nil
 }

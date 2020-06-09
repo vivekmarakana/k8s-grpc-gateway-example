@@ -9,6 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/vivekmarakana/k8s-grpc-gateway/src/gateway"
 	"github.com/vivekmarakana/k8s-grpc-gateway/src/server"
 )
 
@@ -36,7 +37,7 @@ func main() {
 
 	go func() {
 		fmt.Println("Starting HTTP gateway on", *gatewayAddr)
-		if err := server.RunInProcessGateway(ctx, *gatewayAddr); err != nil {
+		if err := gateway.Run(ctx, *gatewayAddr, "localhost"+*serverAddr); err != nil {
 			log.Fatal(err)
 		}
 	}()
