@@ -15,11 +15,11 @@ func newEchoServer() proto.EchoServiceServer {
 }
 
 func (s *echoServer) Echo(ctx context.Context, req *proto.RequestMessage) (*proto.ResponseMessage, error) {
-	if req.Message == "empty" {
+	if req.Message == "" {
 		return &proto.ResponseMessage{
 			You:     "you",
 			Me:      "me",
-			Message: "Nothing!",
+			Message: ":(",
 		}, nil
 	}
 

@@ -19,6 +19,9 @@ service EchoService {
 	rpc Echo(RequestMessage) returns (ResponseMessage) {
 		option (google.api.http) = {
 			get: "/v1/echo/{message}"
+			additional_bindings {
+				get: "/v1/echo"
+			}
 		};
 	}
 }
