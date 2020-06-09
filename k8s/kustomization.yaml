@@ -1,0 +1,6 @@
+namePrefix: grpc-gateway-
+commonLabels: 
+  app: grpc-gateway
+resources:
+- deployment.yaml
+- service.yaml

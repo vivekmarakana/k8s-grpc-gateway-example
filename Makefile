@@ -17,4 +17,4 @@ gp:
 	protoc -I/usr/local/include -I. -I$(GOPATH)/src -I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis --grpc-gateway_out=logtostderr=true:. ./proto/echo_service.proto
 
 dockerbuild: gp
-	docker build . -t gateway:latest
+	docker build . -t $(DOCKER_HUB_USERNAME)/k8s-grpc-gateway:latest

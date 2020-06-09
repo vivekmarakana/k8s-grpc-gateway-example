@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: k8s-grpc-gateway
+        image: vivekmarakana/k8s-grpc-gateway:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: gateway
+        - containerPort: 9090
+          name: server
