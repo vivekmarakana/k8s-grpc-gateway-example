@@ -1,4 +1,4 @@
-# k8s-grpc-gateway-example
+# [k8s-grpc-gateway-example](https://github.com/vivekmarakana/k8s-grpc-gateway-example)
 
 This is a sample gRPC Server with HTTP gateway using [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) library.
 
@@ -17,9 +17,8 @@ message RequestMessage {
 }
 
 message ResponseMessage {
-	string you = 1;
-	string me = 2;
-	string message = 3;
+	string host = 1;
+	string message = 2;
 }
 
 service EchoService {
@@ -59,8 +58,7 @@ bash-3.2$ evans repl --host localhost --port 9090 --reflection
 proto.EchoService@127.0.0.1:9090> call Echo
 message (TYPE_STRING) => hello
 {
-  "you": "you",
-  "me": "me",
+  "host": "127.0.0.1",
   "message": "hello"
 }
 
@@ -72,14 +70,12 @@ HTTP gateway is running on port 8080. You can call it using browser or curl:
 ```
 bash-3.2$ curl -s localhost:8080/v1/echo | jq
 {
-  "you": "you",
-  "me": "me",
+  "host": "127.0.0.1",
   "message": ":("
 }
 bash-3.2$ curl -s localhost:8080/v1/echo/hello | jq
 {
-  "you": "you",
-  "me": "me",
+  "host": "127.0.0.1",
   "message": "hello"
 }
 ```

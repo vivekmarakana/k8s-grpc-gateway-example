@@ -10,9 +10,8 @@ message RequestMessage {
 }
 
 message ResponseMessage {
-	string you = 1;
-	string me = 2;
-	string message = 3;
+	string host = 1;
+	string message = 2;
 }
 
 service EchoService {
